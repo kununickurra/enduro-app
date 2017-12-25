@@ -51,6 +51,16 @@
                 /*bottom : 50px !important;*/
                 /*left : 0 !important;*/
             }
+            #trips-map-container {
+                height: 600px;
+                width: 100%;
+                /*padding: 0;*/
+                /*position : absolute !important;*/
+                /*top : 120px !important;*/
+                /*right : 0;*/
+                /*bottom : 50px !important;*/
+                /*left : 0 !important;*/
+            }
         </style>
 
         <title>Enduro App</title>
@@ -122,10 +132,9 @@
                 <h1>Enduro</h1>
             </div>
             <div data-role="content">
-                <label for="input-select-trips">Select a speed</label>
-                <select id="input-select-trips">
+                <select id="input-select-trips" placeholder="Select a trip">
                 </select>
-
+                <div id="trips-map-container" data-role="content"></div>
             </div>
 
             <div data-role="footer" data-position="fixed">
@@ -143,7 +152,6 @@
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLWf2mw5gIizjqwsOK35YoK7CRZtA1e80&libraries=geometry"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/database.js"></script>
-        <script type="text/javascript" src="js/database-factory.js"></script>
         <script type="text/javascript" src="js/trips.js"></script>
         <script type="text/javascript" src="js/trip-service.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

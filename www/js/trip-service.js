@@ -7,7 +7,7 @@ var TripService = function () {
     }
 
     this.getTripLogs = function(tripId, callBack) {
-        var sql = "SELECT * FROM trip_log WHERE trip_id = ?";
+        var sql = "SELECT * FROM trip_log WHERE trip_id = ? order by occurred desc";
         var rows = SQLDataAccessService.getInstance().executeQuery(sql, [tripId]).done(function(data) {
             callBack(data);
         });

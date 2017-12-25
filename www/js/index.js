@@ -11,9 +11,12 @@ $(document).on('deviceready', function () {
 
 $(document).ready(function () {
 
+
     $("#btn-show-map").click(function(event) {
         if(_last_position!=null) {
-            showMap(_last_position);
+            var latLng = new google.maps.LatLng(_last_position.coords.latitude, _last_position.coords.longitude);
+            showMap(latLng, document.getElementById('map-container'));
+            createMarkerForHome(_last_position);
         }
     });
 
@@ -70,21 +73,18 @@ function getCurrentPosition() {
     return false;
 }
 
-function showMap(position) {
-    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+function showMap(position, container) {
     var mapOptions = {
-        center: latLng,
+        center: position,
         // center: new google.maps.LatLng(coords.coords.latitude, coords.coords.longitude),
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    _map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
+    _map = new google.maps.Map(container, mapOptions);
     Infowindow = new google.maps.InfoWindow();
-    createMarkerForHome(latLng);
     // var otherPoint = new google.maps.LatLng(50.7219134, 4.5294501);
     // drawLine([latLng, otherPoint]);
-
 }
 
 function createMarkerForHome(position) {
@@ -97,7 +97,6 @@ function createMarkerForHome(position) {
         icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
     });
 }
-
 
 function drawLine(path) {
     var line = new google.maps.Polyline({

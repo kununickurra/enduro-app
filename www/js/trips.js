@@ -2,6 +2,11 @@ $(document).ready(function () {
     $("#trip-page").bind('pagebeforeshow', function () {
         loadTrips();
     });
+
+    $("#input-select-trips").change(function () {
+        loadTripData($(this).find('option:selected').val());
+    });
+
 });
 
 function loadTrips() {
@@ -14,7 +19,16 @@ function loadTrips() {
     });
 }
 
-function loadTripData() {
+function loadTripData(tripId) {
     var tripService = new TripService();
+    tripService.getTripLogs(tripId, function (tripLogs) {
+        var latLng = new google.maps.LatLng(tripLogs[0].latitude, tripLogs[0].longitude);
+        showMap(latLng, document.getElementById('trips-map-container'))
+        var path = [];
+        for (i = 0; i < tripLogs.length; i++) {
+            path.push(new google.maps.LatLng(tripLogs[i].latitude, tripLogs[i].longitude));
+        }
+        drawLine(path);
+    });
 }
 
