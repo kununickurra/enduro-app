@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">-->
+
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <!-- Include jQuery Mobile stylesheets -->
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+        <style>
+            #map-container {
+                height: 600px;
+                width: 100%;
+                /*padding: 0;*/
+                /*position : absolute !important;*/
+                /*top : 120px !important;*/
+                /*right : 0;*/
+                /*bottom : 50px !important;*/
+                /*left : 0 !important;*/
+            }
+        </style>
+
+        <title>Enduro App</title>
+    </head>
+    <body>
+
+        <div data-role="page" class="ui-page ui-page-header-fixed" id="main-page">
+
+            <div data-role="header" class="ui-header ui-bar" role="banner">
+                <h1 class="ui-title" role="heading" aria-level="1">Enduro App</h1>
+                <a href="#left-panel" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false"
+                   class="ui-icon-nodisc ui-btn-left ui-btn ui-btn-corner-all ui-btn-icon-notext ui-btn-up-d" data-corners="true"
+                   data-wrapperels="span" title="Open left panel">
+                    <span class="ui-btn-inner">
+                    <span class="ui-btn-text">Open left panel</span>
+                    <span class="ui-icon ui-icon-arrow-r">&nbsp;</span></span>
+                </a>
+            </div>
+
+            <!-- panel -->
+            <div data-role="panel" id="left-panel" data-theme="b">
+                <p>Left reveal panel.</p>
+                <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+                <a href="#trip-page" class="ui-btn">Trips</a>
+            </div>
+            <!-- /panel -->
+
+            <div data-role="content">
+                <!--<p>-->
+                    <!--Current location : <span id="text-location">Unknown</span>-->
+                <!--</p>-->
+                <label for="input-trip-id">Trip ID</label>
+                <input type="text" id="input-trip-id">
+
+                <label for="input-trip-id">Interval</label>
+                <input type="text" id="input-interval" value="5000">
+
+                <i id="btn-start-tracking" class="ui-btn ui-btn-inline">
+                    Start tracking
+                </i>
+
+                <i id="btn-stop-tracking" class="ui-btn  ui-btn-inline">
+                    Stop tracking
+                </i>
+                <i id="btn-show-map" class="ui-btn ui-btn-inline">
+                    Show Map
+                </i>
+                <i id="btn-add-marker" class="ui-btn ui-btn-inline">
+                    Add marker
+                </i>
+                <p>
+                <span align="left">Current location : <span id="text-location">Unknown</span></span>
+                </p>
+                <div data-role="content" id="map-container">
+                    Map is currently being initialized...
+                </div>
+
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <h1>Enjoy your ride</h1>
+            </div>
+
+
+        </div>
+
+        <div data-role="page" class="ui-page ui-page-header-fixed" id="trip-page">
+            <div data-role="header" data-position="fixed">
+                <h1>Enduro</h1>
+            </div>
+            <div data-role="content">
+                <label for="input-select-trips">Select a speed</label>
+                <select id="input-select-trips">
+                </select>
+
+            </div>
+
+            <div data-role="footer" data-position="fixed">
+                <h1>Enjoy your ride</h1>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+                <!-- Include the jQuery library -->
+        <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+        <!-- Include the jQuery Mobile library -->
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLWf2mw5gIizjqwsOK35YoK7CRZtA1e80&libraries=places"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLWf2mw5gIizjqwsOK35YoK7CRZtA1e80&libraries=geometry"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/database.js"></script>
+        <script type="text/javascript" src="js/database-factory.js"></script>
+        <script type="text/javascript" src="js/trips.js"></script>
+        <script type="text/javascript" src="js/trip-service.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
