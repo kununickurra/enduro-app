@@ -4,6 +4,8 @@ var _current_trip_id = null;
 var _last_position = null;
 var _map = null;
 
+var BACKEND_BASE_URL="http://192.168.0.202";
+
 // Initialize elements when received the 'deviceready' event from cordova.
 $(document).on('deviceready', function () {
 

@@ -21,4 +21,12 @@ var TripService = function () {
         });
     }
 
+    this.getTripsToSync = function(callBack) {
+        var sql = "SELECT trip_id,latitude,longitude,occurred FROM trip_log ORDER BY occurred";
+        var rows = SQLDataAccessService.getInstance().executeQuery(sql, []);
+        SQLDataAccessService.getInstance().executeQuery(sql, []).done(function(data) {
+            callBack(data);
+        });
+    }
+
 }
